@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <button id="bouton" onclick="lancerRequeteAjax()">Effectuer une requete Ajax</button>
+
+    <script>
+        const URL = 'test.html';
+        function lancerRequeteAjax(){
+            fetch(URL)
+                .then(function (reponse) {
+                    if (reponse.ok) {
+                        return reponse.text();
+                    } else {
+                        alert('Erreur renvoyée par le serveur');
+                    }
+                })
+            .then(function (html) {
+                afficherResultat(html);
+            })
+            .catch(function (erreur) {
+                alert('Erreur dans la requete ajax : ' + erreur);
+                return false;
+            })
+        }
+
+        function afficherResultat(html) {
+            alert(html);
+        }
+    </script>
+
+</body>
+</html>

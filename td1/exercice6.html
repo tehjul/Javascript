@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Dessiner un triangle</h1>
+
+<label for="taille">Taille :</label>
+<span id = "le-min"></span>
+<input id="taille" type="range" max="20" min="1">
+<span id = "le-max"></span>
+
+<div id="triangle"></div>
+
+<script type="text/javascript">
+    let monInput = document.getElementById('taille');
+    let zoneTriangle = document.getElementById('triangle');
+
+    document.getElementById('le-min').innerHTML = monInput.getAttribute('min');
+    document.getElementById('le-max').innerHTML = monInput.getAttribute('max');
+
+    monInput.addEventListener('change', function (){
+
+        let taille = this.value;
+        let triangle = 'Triangle de taille ' + taille + '<br><br>';
+
+        for (let i = 1; i <= taille; i++){
+            for (let j = 1; j <= i; j++){
+                triangle += '*';
+            }
+            triangle += '<br>';
+        }
+        zoneTriangle.innerHTML = triangle;
+    })
+
+</script>
+
+</body>
+</html>

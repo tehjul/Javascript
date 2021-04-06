@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        td{
+            width: 4em;
+            height: 4em;
+        }
+        img{
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<table border="1" cellpadding="0" cellspacing="0">
+    <tr>
+        <td><img src="img/blanc.gif" alt="" onmouseenter="entrerCase(this)" onmouseout="sortirCase()"></td>
+        <td><img src="img/blanc.gif" alt="" onmouseenter="entrerCase(this)" onmouseout="sortirCase()"></td>
+        <td><img src="img/blanc.gif" alt="" onmouseenter="entrerCase(this)" onmouseout="sortirCase()"></td>
+    </tr>
+    <tr>
+        <td><img src="img/blanc.gif" alt="" onmouseenter="entrerCase(this)" onmouseout="sortirCase()"></td>
+        <td><img src="img/blanc.gif" alt="" onmouseenter="entrerCase(this)" onmouseout="sortirCase()"></td>
+        <td><img src="img/blanc.gif" alt="" onmouseenter="entrerCase(this)" onmouseout="sortirCase()"></td>
+    </tr>
+    <tr>
+        <td><img src="img/blanc.gif" alt="" onmouseenter="entrerCase(this)" onmouseout="sortirCase()"></td>
+        <td><img src="img/blanc.gif" alt="" onmouseenter="entrerCase(this)" onmouseout="sortirCase()"></td>
+        <td><img src="img/blanc.gif" alt="" onmouseenter="entrerCase(this)" onmouseout="sortirCase()"></td>
+    </tr>
+</table>
+
+<script>
+    let caseActuelle = null;
+
+    function entrerCase(caseActive){
+        caseActuelle = caseActive;
+    }
+    function sortirCase(){
+        caseActuelle = null;
+    }
+
+    window.onkeyup = function(event){
+        if (caseActuelle !== null && !caseActuelle.classList.contains('desactivee')){
+            const touche = event.key;
+
+            if (touche === 'o'){
+                caseActuelle.src = 'img/rond.gif';
+                caseActuelle.className = 'desactivee';
+            } else if (touche === 'x'){
+                caseActuelle.src = 'img/croix.gif';
+                caseActuelle.className = 'desactivee';
+            }
+         caseActuelle = null;
+        }
+    }
+
+</script>
+
+</body>
+</html>

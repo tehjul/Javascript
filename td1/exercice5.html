@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<h1>Dessiner un triangle</h1>
+
+<button onclick="dessiner(5)">5</button>
+<button onclick="dessiner(10)">10</button>
+<button onclick="dessiner(15)">15</button>
+<button onclick="reset()">reset</button>
+
+<div id="triangle"></div>
+
+<script type="text/javascript">
+    function reset(){
+        document.getElementById('triangle').innerHTML = '';
+    }
+
+    function dessiner(taille){
+        let triangle = 'Triangle de taille ' + taille + '<br><br>';
+        for (let i = 1; i <= taille; i++){
+            for (let j = 1; j <= i; j++){
+                triangle += '*';
+            }
+            triangle += '<br>';
+        }
+
+
+        document.getElementById('triangle').innerHTML = triangle;
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .bleu {
+            color: blue;
+        }
+        .rouge {
+            color: red;
+        }
+        #btn2 {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="text" class="bleu">
+    Ceci est un texte écrit en HTML.
+</div>
+
+<button onclick="changerCouleur()">
+    Changer couleur
+</button>
+
+<hr>
+
+<div id="cacher">
+    Ceci est un bloc invisible... ou pas.
+</div>
+
+<button id="btn1" onclick="cacher()">Cacher le bloc</button>
+<button id="btn2" onclick="afficher()">Afficher le bloc</button>
+
+<script type="text/javascript">
+    function changerCouleur() {
+        let testage = document.getElementById('text').className;
+
+        if (testage === 'rouge') document.getElementById('text').className = 'bleu';
+        else document.getElementById('text').className = 'rouge';
+    }
+    function cacher(){
+        document.getElementById('cacher').style.display = 'none';
+        document.getElementById('btn1').style.display = 'none';
+        document.getElementById('btn2').style.display = 'block';
+    }
+
+    function afficher(){
+        document.getElementById('cacher').style.display = 'block';
+        document.getElementById('btn1').style.display = 'block';
+        document.getElementById('btn2').style.display = 'none';
+    }
+</script>
+</body>
+</html>

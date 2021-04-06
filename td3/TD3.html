@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>TD3</title>
+</head>
+
+<body>
+<h1>Valider un formulaire</h1>
+
+<section>
+    <form action="resultat.html" method="get" name="formulaire" onsubmit="return verifierFormulaire()">
+        <div>
+            <label for="genre">Civilite :</label>
+            <select name="genre" id="genre" onchange="verifierGenre()">
+                <option value="vide" selected></option>
+                <option value="m">M.</option>
+                <option value="mme">Mme</option>
+                <option value="mlle">Mlle</option>
+                <option value="prononcepas">Ne se prononce pas</option>
+            </select>
+            <span id="champGenre" class="test">Le genre est obligatoire</span>
+        </div>
+        <div>
+            <label for="nom">Nom :</label>
+            <input type="text" name="nom" id="nom" onkeyup="verifierNom()">
+            <span id="champNom" class="test">Saisir un nom, entre 2 et 10 caracteres</span>
+        </div>
+        <div>
+            <label for="prenom">Prenom :</label>
+            <input type="text" name="prenom" id="prenom" onkeyup="verifierPrenom()">
+            <span id="champPrenom" class="test">Saisir un prenom, entre 2 et 10 caracteres</span>
+        </div>
+        <div>
+            <label for="adresse">Adresse :</label>
+            <input type="text" name="adresse" id="adresse" onkeyup="verifierAdresse()">
+            <span id="champAdresse" class="test">Saisir une adresse, entre 5 et 100 caracteres</span>
+        </div>
+        <div>
+            <label for="codePostal">Code postal :</label>
+            <input type="text" name="codePostal" id="codePostal" onkeyup="verifierCP()">
+            <span id="champCodePostal" class="test">Saisir un code postal valide</span>
+        </div>
+        <div>
+            <label for="ville">Ville :</label>
+            <input type="text" name="ville" id="ville" onkeyup="verifierVille()">
+            <span id="champVille" class="test">Saisir une ville, entre 2 et 50 caracteres</span>
+        </div>
+        <div>
+            <label for="email">Email :</label>
+            <input type="email" name="email" id="email" placeholder="moi@test.fr" onkeyup="verifierMail()">
+            <span id="champEmail" class="test">Saisir une adresse email valide</span>
+        </div>
+        <div>
+            <label for="telephone">Telephone :</label>
+            <input type="tel" name="telephone" id="telephone" placeholder="01 23 45 67 89" onkeyup="verifierTelephone()">
+            <span id="champTel" class="test">Saisir un numéro de téléphone valide</span>
+        </div>
+
+        <hr>
+        <div>
+            <div id="explication">
+                <ul>
+                    <li><img id="case1" src="img/vide.png" height="21" alt="une case">
+                        Le mot de passe doit contenir des lettres et des chiffres</li>
+                    <li><img id="case2" src="img/vide.png" height="21" alt="une case">
+                        Le mot de passe doit contenir au moins un caractères spécial</li>
+                    <li><img id="case3" src="img/vide.png" height="21" alt="une case">
+                        Le mot de passe doit être compris entre 5 et 15 caractères</li>
+                </ul>
+            </div>
+
+            <div>
+                <label for="mdp">Mot de passe :</label>
+                <input type="password" name="mdp" id="mdp"
+                        onkeyup="verifierMotDePasse()"
+                        onfocus="document.getElementById('explication').style.display = 'block'"
+                        onblur="document.getElementById('explication').style.display = 'none'">
+                <span id="champMdp" class="test">Le mot de passe est trop faible.</span>
+            </div>
+            <div>
+                <label for="mdp2">Confirmer passe :</label>
+                <input type="password" name="mdp2" id="mdp2" onkeyup="verifierConfirmation()">
+                <span id="champMdp2" class="test"></span>
+            </div>
+        </div>
+
+        <hr>
+        <div>
+            <label for="accept">Acceptez les conditions d'utilisation :</label>
+            <input type="checkbox" name="accept" id="accept" onchange="verifierCaseCochee()">
+            <span id="champAcceptation" class="test">Veuillez accepter les conditions pour continuer</span>
+        </div>
+
+        <p>
+            <input type="submit" value="Envoyer">
+        </p>
+    </form>
+</section>
+
+<script type="text/javascript">
+    const regexNom = /^[a-zA-Z]{2,10}$/;
+    const regexAdresse = /^[a-zA-Z]([-'\s]?[a-zA-Z]){4,99}$/;
+    const regexVille = /^[a-zA-Z]([-'\s]?[a-zA-Z]){1,49}$/;
+    const regexTelephone = /^(0|\+33)[1-9]([-. ]?[0-9]{2}){4}$/;
+    const regexCodePostal = /^[0-9]{5}$/;
+    const regexEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    function verifierFormulaire(){
+        let valide = true;
+        if (!verifierGenre()){
+            valide = false;
+        }
+        if (!verifierNom()){
+            valide = false;
+        }
+        if (!verifierPrenom()){
+            valide = false;
+        }
+        if (!verifierAdresse()){
+            valide = false;
+        }
+        if (!verifierCP()){
+            valide = false;
+        }
+        if (!verifierVille()){
+            valide = false;
+        }
+        if (!verifierMail()){
+            valide = false;
+        }
+        if (!verifierTelephone()){
+            valide = false;
+        }
+        if (!verifierCaseCochee()){
+            valide = false;
+        }
+        if (!verifierMotDePasse()){
+            valide = false;
+        }
+        if (!verifierConfirmation()){
+            valide = false;
+        }
+        return valide;
+    }
+
+    function verifierGenre(){
+        if (document.formulaire.genre.value === 'vide'){
+            document.getElementById('champGenre').style.display = 'inline-block';
+            return false;
+        } else{
+            document.getElementById('champGenre').style.display = 'none';
+            return true;
+        }
+    }
+
+    function verifierNom(){
+        if (document.formulaire.nom.value.match(regexNom)){
+            document.getElementById('champNom').style.display = 'none';
+            return true;
+        } else{
+            document.getElementById('champNom').style.display = 'inline-block';
+            return false;
+        }
+    }
+
+    function verifierPrenom(){
+        if (document.formulaire.prenom.value.match(regexNom)){
+            document.getElementById('champPrenom').style.display = 'none';
+            return true;
+        } else{
+            document.getElementById('champPrenom').style.display = 'inline-block';
+            return false;
+        }
+    }
+
+    function verifierAdresse(){
+        if (document.formulaire.adresse.value.match(regexAdresse)){
+            document.getElementById('champAdresse').style.display = 'none';
+            return true;
+        } else{
+            document.getElementById('champAdresse').style.display = 'inline-block';
+            return false;
+        }
+    }
+
+    function verifierCP(){
+        if (document.formulaire.codePostal.value.match(regexCodePostal)){
+            document.getElementById('champCodePostal').style.display = 'none';
+            return true;
+        } else{
+            document.getElementById('champCodePostal').style.display = 'inline-block';
+            return false;
+        }
+    }
+
+    function verifierVille(){
+        if (document.formulaire.ville.value.match(regexVille)){
+            document.getElementById('champVille').style.display = 'none';
+            return true;
+        } else{
+            document.getElementById('champVille').style.display = 'inline-block';
+            return false;
+        }
+    }
+
+    function verifierMail(){
+        if (document.formulaire.email.value.match(regexEmail)){
+            document.getElementById('champEmail').style.display = 'none';
+            return true;
+        } else{
+            document.getElementById('champEmail').style.display = 'inline-block';
+            return false;
+        }
+    }
+
+    function verifierTelephone(){
+        if (document.formulaire.telephone.value.match(regexTelephone)){
+            document.getElementById('champTel').style.display = 'none';
+            return true;
+        } else{
+            document.getElementById('champTel').style.display = 'inline-block';
+            return false;
+        }
+    }
+
+    function verifierCaseCochee(){
+        if (document.formulaire.accept.checked) {
+            document.getElementById('champAcceptation').style.display = 'none';
+        } else{
+            document.getElementById('champAcceptation').style.display = 'inline-block';
+        }
+    }
+
+    function verifierMotDePasse(){
+        let correct = true;
+        let mdp = document.formulaire.mdp.value;
+
+        document.getElementById('champMdp').style.display = 'none';
+
+        if (mdp.search(/\d/) !== -1 && mdp.search(/[a-zA-Z]/) !== -1){
+            document.getElementById('case1').src = 'img/coche.jpg';
+        } else {
+            correct = false;
+            document.getElementById('case1').src = 'img/vide.png';
+        }
+
+        if (mdp.search(/[!#$%&?+=()@*."]/) !== -1){
+            document.getElementById('case2').src = 'img/coche.jpg';
+        } else {
+            correct = false;
+            document.getElementById('case2').src = 'img/vide.png';
+        }
+
+        if (mdp.length >= 5 && mdp.length <= 15){
+            document.getElementById('case3').src = 'img/coche.jpg';
+        } else {
+            correct = false;
+            document.getElementById('case3').src = 'img/vide.png';
+        }
+
+        if (!correct){
+            document.getElementById('champMdp').style.display = 'inline-block';
+        }
+        return correct;
+    }
+
+    function verifierConfirmation(){
+        let correct = true;
+        let mdp2 = document.formulaire.mdp2.value;
+        let monChamp = document.getElementById('champMdp2');
+        monChamp.style.display = 'block';
+        monChamp.innerText = '';
+
+        if (mdp2 === '') {
+            monChamp.innerText = 'La confirmation est obligatoire';
+            correct = false;
+        }
+
+        if (mdp2 !== document.getElementById('mdp').value){
+            monChamp.innerText = 'Les mots de passe doivent être identiques';
+            correct = false;
+        }
+
+        return correct;
+    }
+
+</script>
+</body>
+</html>

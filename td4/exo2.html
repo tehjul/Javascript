@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+        </header>
+
+        <section>
+            <hr>
+
+            <p>
+                Cette page fait des requetes AJAX afin de récupérer le HEADER et le FOOTER.
+            </p>
+
+            <button id="bouton-header" class="btn btn-default">Afficher le header</button>
+            <button id="bouton-footer" class="btn btn-default">Afficher le footer</button>
+
+            <hr>
+        </section>
+
+        <footer>
+        </footer>
+
+    </div>
+
+    <script type="text/javascript" src="lib/jquery-3.3.1.js"></script>
+    <script type="text/javascript">
+        const URL_HEADER = 'fragments/header.html';
+
+        document.querySelector('#bouton-header').onclick = function () {
+            fetch(URL_HEADER)
+                .then(function (reponse) {
+                    return reponse.text();
+                })
+                .then(function (html) {
+                    let pageTemporaire = document.createElement('html');
+                    pageTemporaire.innerHTML = html;
+                    let maDiv = pageTemporaire.querySelector('#header-fragment');
+                    document.querySelector('header').innerHTML = maDiv.innerHTML;
+                })
+                .catch(function (erreur) {
+                    alert(erreur);
+                })
+                .finally(function () {
+
+                })
+        };
+        const URL_FOOTER = 'fragments/footer.html';
+
+        document.querySelector('#bouton-footer').onclick = function () {
+            fetch(URL_FOOTER)
+                .then(function (reponse) {
+                    return reponse.text();
+                })
+                .then(function (html) {
+                    let pageTemporaire = document.createElement('html');
+                    pageTemporaire.innerHTML = html;
+                    let maDiv = pageTemporaire.querySelector('#footer-fragment');
+                    document.querySelector('footer').innerHTML = maDiv.innerHTML;
+                })
+                .catch(function (erreur) {
+                    alert(erreur);
+                })
+                .finally(function () {
+
+                })
+        };
+
+    </script>
+
+</body>
+</html>

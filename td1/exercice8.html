@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        body {
+            margin: 2em;
+        }
+        #cadre1, #cadre2 {
+            border: solid black 2px;
+            width: 300px;
+            min-height: 200px;
+            display: inline-block;
+        }
+        .corail {
+            background-color: coral;
+        }
+        .bleu {
+            background-color: cornflowerblue;
+        }
+    </style>
+
+</head>
+<body>
+
+<h1>Le rectangle change de couleur</h1>
+<div id="cadre1" class="corail" onmouseenter="changecoul(this)" onmouseout="changecoul(this)"></div>
+<div id="cadre2" class="bleu" onmouseenter="changecoul(this)" onmouseout="changecoul(this)"></div>
+
+<script type="text/javascript">
+
+    function changecoul(rectangle){
+        if (rectangle.className === 'corail') rectangle.className = 'bleu';
+        else
+            rectangle.className = 'corail';
+    }
+
+</script>
+</body>
+</html>

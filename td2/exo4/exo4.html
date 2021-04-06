@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Viseur</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="canvas">Cliquer dedans</div>
+
+<script type="text/javascript">
+    const LARGEUR = 600;
+    const ESPACE = 4;
+
+    function estDansLeCanvas(x,y){
+        return x > 0 && x < LARGEUR && y > 0 && y < LARGEUR;
+    }
+
+    document.getElementById('canvas').addEventListener('click', function (e){
+        let coordonneesBordureGauche = this.offsetLeft;
+        let coordonneesBordureHaut = this.offsetTop;
+
+        const coordonneeDuCurseurX = e.pageX - coordonneesBordureGauche;
+        const coordonneeDuCurseurY = e.pageY - coordonneesBordureHaut;
+
+        this.innerHTML = '';
+
+        for (let nbPoints = -LARGEUR / 2; nbPoints < LARGEUR / 2; nbPoints++){
+            let x = coordonneeDuCurseurX;
+            let y = coordonneeDuCurseurY + (ESPACE * nbPoints);
+
+            if (estDansLeCanvas(x, y)) {
+                let point = document.createElement('span');
+                point.style.left = x + 'px';
+                point.style.top = y + 'px';
+                this.appendChild(point);
+            }
+        }
+
+        for (let nbPoints = -LARGEUR / 2; nbPoints < LARGEUR / 2; nbPoints++){
+            let x = coordonneeDuCurseurX + (ESPACE * nbPoints);
+            let y = coordonneeDuCurseurY;
+
+            if (estDansLeCanvas(x, y)) {
+                let point = document.createElement('span');
+                point.style.left = x + 'px';
+                point.style.top = y + 'px';
+                this.appendChild(point);
+            }
+        }
+    });
+
+</script>
+</body>
+</html>
